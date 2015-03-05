@@ -10,7 +10,7 @@ class Crossaver {
         Crossaver();
 
         // The destructor
-        ~Crossaver();
+        virtual ~Crossaver();
 
         // Called in the main function.
         // Returns the value the main program must return.

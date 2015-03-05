@@ -3,6 +3,8 @@
 Crossaver::Crossaver() : m_renderWindow(NULL) {}
 
 Crossaver::~Crossaver() {
+    if (m_renderWindow)
+        delete m_renderWindow;
 }
 
 int Crossaver::run() {
