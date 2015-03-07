@@ -1,0 +1,18 @@
+# Crossaver global .gitignore
+# CMake
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+install_manifest.txt
+
+# Platform-dependant build systems
+Makefile
+
+# Libraries
+lib
+
+# Executables
+bin
+
+# Editor temporary files
+*.swp
