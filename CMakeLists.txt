@@ -18,7 +18,7 @@ file(
 
 add_library(
     crossaver
-    SHARED
+    STATIC
     ${source_files}
 )
 
