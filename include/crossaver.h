@@ -26,11 +26,15 @@ class Crossaver {
         // Draws one frame of the screensaver
         virtual bool render() = 0;
 
-        // Draws one frame of the screensaver, for the preview window
-        virtual bool renderPreview();
+        // Returns true if the screensaver is in preview mode
+        bool isPreview();
 
         // pointer to a SFML window
         sf::RenderWindow* m_renderWindow;
+
+    private:
+        // true if the screensaver has to render itself in preview mode
+        bool m_isPreview;
 
 };
 

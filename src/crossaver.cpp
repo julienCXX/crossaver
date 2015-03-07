@@ -4,7 +4,7 @@
 
 #include "request.h"
 
-Crossaver::Crossaver() : m_renderWindow(NULL) {}
+Crossaver::Crossaver() : m_renderWindow(NULL), m_isPreview(false) {}
 
 Crossaver::~Crossaver() {
     if (m_renderWindow)
@@ -16,7 +16,8 @@ int Crossaver::run() {
     sf::Event toProcess;
     int mouseX = -1; int mouseY = -1;
 
-    if (request.isPreview()) {
+    m_isPreview = request.isPreview();
+    if (m_isPreview) {
         m_renderWindow = new sf::RenderWindow(request.getHandle());
     } else {
         m_renderWindow = new sf::RenderWindow(sf::VideoMode(800, 600, 32),
@@ -36,7 +37,7 @@ int Crossaver::run() {
                 m_renderWindow->close();
                 continue;
             }
-            if (!request.isPreview()) {
+            if (!m_isPreview) {
                 if (sf::Event::KeyPressed == toProcess.type ||
                         sf::Event::KeyReleased == toProcess.type ||
                         sf::Event::MouseButtonPressed == toProcess.type ||
@@ -58,14 +59,8 @@ int Crossaver::run() {
             }
         }
         // effective frame rendering
-        if (request.isPreview()) {
-            if (!renderPreview())
-                m_renderWindow->close();
-        }
-        else {
-            if (!render())
-                m_renderWindow->close();
-        }
+        if (!render())
+            m_renderWindow->close();
     }
 
     if (!shutDown())
@@ -82,6 +77,6 @@ bool Crossaver::shutDown() {
     return true;
 }
 
-bool Crossaver::renderPreview() {
-    return render();
+bool Crossaver::isPreview() {
+    return m_isPreview;
 }
