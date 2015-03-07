@@ -1,5 +1,7 @@
 #include <crossaver.h>
 
+#include <SFML/Window/Event.hpp>
+
 #include "request.h"
 
 Crossaver::Crossaver() : m_renderWindow(NULL) {}
@@ -15,9 +17,9 @@ int Crossaver::run() {
     int mouseX = -1; int mouseY = -1;
 
     if (request.isPreview()) {
-        m_renderWindow = new sf::Window(request.getHandle());
+        m_renderWindow = new sf::RenderWindow(request.getHandle());
     } else {
-        m_renderWindow = new sf::Window(sf::VideoMode(800, 600, 32),
+        m_renderWindow = new sf::RenderWindow(sf::VideoMode(800, 600, 32),
                 "Crossaver");
         m_renderWindow->setMouseCursorVisible(false);
     }

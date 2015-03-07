@@ -1,7 +1,7 @@
 #ifndef _CROSSAVER_H_CROSSAVER
 #define _CROSSAVER_H_CROSSAVER
 
-#include <SFML/Window.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class Crossaver {
 
@@ -30,7 +30,7 @@ class Crossaver {
         virtual bool renderPreview();
 
         // pointer to a SFML window
-        sf::Window* m_renderWindow;
+        sf::RenderWindow* m_renderWindow;
 
 };
 
