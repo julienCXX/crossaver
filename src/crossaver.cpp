@@ -2,6 +2,7 @@
 
 #include <SFML/Window/Event.hpp>
 
+#include "requestType.h"
 #include "request.h"
 
 Crossaver::Crossaver() : m_renderWindow(NULL), m_isPreview(false) {}
@@ -16,8 +17,8 @@ int Crossaver::run() {
     sf::Event toProcess;
     int mouseX = -1; int mouseY = -1;
 
-    m_isPreview = request.isPreview();
-    if (m_isPreview) {
+    m_isPreview = request.getRequestType() == PREVIEW;
+    if (m_isPreview || request.isFullScreenViaHandle()) {
         m_renderWindow = new sf::RenderWindow(request.getHandle());
     } else {
         m_renderWindow = new sf::RenderWindow(sf::VideoMode(800, 600, 32),

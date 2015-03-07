@@ -3,6 +3,8 @@
 
 #include <SFML/Window/WindowHandle.hpp>
 
+#include "requestType.h"
+
 class Request {
 
     public:
@@ -10,12 +12,16 @@ class Request {
 
         ~Request();
 
-        bool isPreview();
+        RequestType getRequestType();
+
+        bool isFullScreenViaHandle();
 
         sf::WindowHandle getHandle();
 
     private:
-        bool m_preview;
+        bool isWindowFullScreen();
+
+        RequestType m_requestType;
 
         sf::WindowHandle m_handle;
 
