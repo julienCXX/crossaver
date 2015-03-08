@@ -5,8 +5,16 @@ CMakeFiles
 cmake_install.cmake
 install_manifest.txt
 
-# Platform-dependant build systems
+# Build systems/editors project files
 Makefile
+*.cbp
+*.layout
+*.sdf
+*.sln
+*.suo
+*.vcxproj*
+Win32
+*.dir
 
 # Libraries
 lib
