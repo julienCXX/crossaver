@@ -8,7 +8,7 @@
 class Request {
 
     public:
-        Request();
+        Request(int argc, char** argv);
 
         ~Request();
 

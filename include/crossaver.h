@@ -14,7 +14,7 @@ class Crossaver {
 
         // Called in the main function.
         // Returns the value the main program must return.
-        int run();
+        int run(int argc, char** argv);
 
     protected:
         // Inits the structures used in the rendering.
