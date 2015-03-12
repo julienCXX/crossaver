@@ -44,7 +44,7 @@ int Crossaver::run(int argc, char** argv) {
 
     m_isPreview = request.getRequestType() == PREVIEW;
     if (m_isPreview || (IS_FULL_SCREEN_VIA_HANDLE
-                && SCREENSAVER == request.getRequestType())) {
+                && FULL_SCREEN == request.getRequestType())) {
 
 #ifdef _WIN32
         // filling our custom class' fields in order to create another window
@@ -70,7 +70,7 @@ int Crossaver::run(int argc, char** argv) {
 #endif // _WIN32
 
         m_renderWindow = new sf::RenderWindow(request.getHandle());
-    } else if (SCREENSAVER == request.getRequestType()) {
+    } else if (FULL_SCREEN == request.getRequestType()) {
         m_renderWindow = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
                 "Crossaver", sf::Style::Fullscreen);
         m_renderWindow->setMouseCursorVisible(false);
@@ -102,7 +102,7 @@ int Crossaver::run(int argc, char** argv) {
                 continue;
             }
             if (!IS_FULL_SCREEN_VIA_HANDLE
-                    && SCREENSAVER == request.getRequestType()) {
+                    && FULL_SCREEN == request.getRequestType()) {
                 if (sf::Event::KeyPressed == toProcess.type ||
                         sf::Event::KeyReleased == toProcess.type ||
                         sf::Event::MouseButtonPressed == toProcess.type ||

@@ -2,7 +2,7 @@
 #define _CROSSAVER_H_REQUEST_TYPE
 
 typedef enum RequestType {
-    SCREENSAVER,
+    FULL_SCREEN,
     PREVIEW,
     DEBUG,
     CONFIG

@@ -23,7 +23,7 @@ Request::Request(int argc, char** argv) {
     }
     // at least one argument
     if (!strncmp(argv[1], "/s", 2)) {
-        m_requestType = SCREENSAVER;
+        m_requestType = FULL_SCREEN;
         return;
     }
     if (!strncmp(argv[1], "/c", 2)) {
@@ -56,7 +56,7 @@ Request::Request(int argc, char** argv) {
         if (1 == sscanf(winId, " 0x%lx %c", &id, &c) ||
                 1 == sscanf(winId, " %lu %c",  &id, &c)) {
             m_handle = (sf::WindowHandle) id;
-            m_requestType = isWindowFullScreen() ? SCREENSAVER : PREVIEW;
+            m_requestType = isWindowFullScreen() ? FULL_SCREEN : PREVIEW;
         }
     }
 #endif // __unix__
