@@ -14,8 +14,6 @@ class Request {
 
         RequestType getRequestType();
 
-        bool isFullScreenViaHandle();
-
         sf::WindowHandle getHandle();
 
     private:

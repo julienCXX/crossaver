@@ -68,14 +68,6 @@ RequestType Request::getRequestType() {
     return m_requestType;
 }
 
-bool Request::isFullScreenViaHandle() {
-    // XScreensaver gives the screensaver a handle on a fullscreen window
-#ifdef __unix__
-    return true;
-#endif // __unix__
-    return false;
-}
-
 sf::WindowHandle Request::getHandle() {
     return m_handle;
 }

@@ -4,6 +4,7 @@
 
 #include "requestType.h"
 #include "request.h"
+#include "constants.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -42,8 +43,8 @@ int Crossaver::run(int argc, char** argv) {
     }
 
     m_isPreview = request.getRequestType() == PREVIEW;
-    if (m_isPreview || (SCREENSAVER == request.getRequestType()
-                && request.isFullScreenViaHandle())) {
+    if (m_isPreview || (IS_FULL_SCREEN_VIA_HANDLE
+                && SCREENSAVER == request.getRequestType())) {
 
 #ifdef _WIN32
         // filling our custom class' fields in order to create another window
@@ -100,7 +101,7 @@ int Crossaver::run(int argc, char** argv) {
                 m_renderWindow->close();
                 continue;
             }
-            if (!request.isFullScreenViaHandle()
+            if (!IS_FULL_SCREEN_VIA_HANDLE
                     && SCREENSAVER == request.getRequestType()) {
                 if (sf::Event::KeyPressed == toProcess.type ||
                         sf::Event::KeyReleased == toProcess.type ||
