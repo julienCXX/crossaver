@@ -13,8 +13,9 @@
 #endif // __unix__
 
 Request::Request(int argc, char** argv) {
-#ifdef _WIN32
     m_requestType = DEBUG;
+
+#ifdef _WIN32
     // read request parameters from command line
     char* handle;
     if (1 == argc) { // no arguments
@@ -43,7 +44,6 @@ Request::Request(int argc, char** argv) {
         // maybe preview mode, formatted like "/p xxxxx"
         m_handle = (sf::WindowHandle) atoi(argv[2]);
         m_requestType = PREVIEW;
-        return;
     }
 #endif // _WIN32
 
@@ -57,10 +57,8 @@ Request::Request(int argc, char** argv) {
                 1 == sscanf(winId, " %lu %c",  &id, &c)) {
             m_handle = (sf::WindowHandle) id;
             m_requestType = isWindowFullScreen() ? SCREENSAVER : PREVIEW;
-            return;
         }
     }
-    m_requestType = SCREENSAVER;
 #endif // __unix__
 }
 

@@ -31,8 +31,19 @@ int Crossaver::run(int argc, char** argv) {
     HINSTANCE hInstance = GetModuleHandle(NULL);
 #endif // _WIN32
 
+    if (CONFIG == request.getRequestType()) {
+
+#ifdef _WIN32
+        MessageBox(request.getHandle(), "Configuration not yet implemented",
+                "Information", MB_OK | MB_ICONASTERISK);
+#endif // _WIN32
+
+        return EXIT_SUCCESS;
+    }
+
     m_isPreview = request.getRequestType() == PREVIEW;
-    if (m_isPreview || request.isFullScreenViaHandle()) {
+    if (m_isPreview || (SCREENSAVER == request.getRequestType()
+                && request.isFullScreenViaHandle())) {
 
 #ifdef _WIN32
         // filling our custom class' fields in order to create another window
@@ -50,18 +61,22 @@ int Crossaver::run(int argc, char** argv) {
         RegisterClass(&childClass);
         // creating a window with our custom class
         childWindow = CreateWindow("childWindowClass", "Crossaver",
-            WS_CHILD, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-            CW_USEDEFAULT, request.getHandle(), NULL, hInstance, NULL);
+                WS_CHILD, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+                CW_USEDEFAULT, request.getHandle(), NULL, hInstance, NULL);
 
         if (!childWindow)
             return EXIT_FAILURE;
 #endif // _WIN32
 
         m_renderWindow = new sf::RenderWindow(request.getHandle());
+    } else if (SCREENSAVER == request.getRequestType()) {
+        m_renderWindow = new sf::RenderWindow(sf::VideoMode::getDesktopMode(),
+                "Crossaver", sf::Style::Fullscreen);
+        m_renderWindow->setMouseCursorVisible(false);
     } else {
+        // DEBUG
         m_renderWindow = new sf::RenderWindow(sf::VideoMode(800, 600, 32),
                 "Crossaver");
-        m_renderWindow->setMouseCursorVisible(false);
     }
 
     if (!init())
@@ -85,7 +100,8 @@ int Crossaver::run(int argc, char** argv) {
                 m_renderWindow->close();
                 continue;
             }
-            if (!m_isPreview) {
+            if (!request.isFullScreenViaHandle()
+                    && SCREENSAVER == request.getRequestType()) {
                 if (sf::Event::KeyPressed == toProcess.type ||
                         sf::Event::KeyReleased == toProcess.type ||
                         sf::Event::MouseButtonPressed == toProcess.type ||
