@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+include(LinkMode)
+
 # Project definitions
 project(Crossaver)
 
@@ -11,21 +14,21 @@ include_directories(include)
 # Library files
 file(
     GLOB_RECURSE
-    source_files
+    SOURCE_FILES
     src/*
     include/*
 )
 
 add_library(
     crossaver
-    STATIC
-    ${source_files}
+    ${CROSSAVER_LINK_MODE}
+    ${SOURCE_FILES}
 )
 
 # Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-#See the FindSFML.cmake file for additional details and instructions
-set(SFML_STATIC_LIBRARIES TRUE)
+if(${SFML_LINK_TYPE} EQUAL "STATIC")
+    set(SFML_STATIC_LIBRARIES TRUE)
+endif()
 find_package(SFML REQUIRED graphics window system)
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
