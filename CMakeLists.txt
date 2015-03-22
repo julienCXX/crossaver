@@ -21,17 +21,16 @@ file(
 
 add_library(
     crossaver
-    ${CROSSAVER_LINK_MODE}
+    ${CROSSAVER_LINK_TYPE}
     ${SOURCE_FILES}
 )
 
 # Detect and add SFML
-if(${SFML_LINK_TYPE} EQUAL "STATIC")
+if(${SFML_LINK_TYPE} STREQUAL "STATIC")
     set(SFML_STATIC_LIBRARIES TRUE)
 endif()
+
 find_package(SFML REQUIRED graphics window system)
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(crossaver ${SFML_LIBRARIES})
-    target_link_libraries(crossaver ${SFML_DEPENDENCIES})
 endif()
