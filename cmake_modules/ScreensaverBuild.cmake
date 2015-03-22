@@ -18,7 +18,7 @@ endif()
 
 add_executable(${EXECUTABLE_NAME} ${SRC_FILES})
 
-if(${SFML_LINK_TYPE} EQUAL "STATIC")
+if(${SFML_LINK_TYPE} STREQUAL "STATIC")
     set(SFML_STATIC_LIBRARIES TRUE)
 endif()
 
